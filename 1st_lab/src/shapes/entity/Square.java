@@ -13,6 +13,7 @@ public class Square implements Shape{
     // center point of square
     private Point mPointCenter;
 
+    // square vertexes
     private Point[] mVertexes;
 
     //  segments of square
