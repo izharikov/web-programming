@@ -1,12 +1,17 @@
 package shapes.entity;
 
 /**
- * Created by Igor on 01.09.2016.
+ * Point class
  */
 public class Point implements Shape{
     private double x;
     private double y;
 
+    /**
+     *
+     * @param x x coordinate
+     * @param y y coordinate
+     */
     public Point(double x, double y) {
         this.x = x;
         this.y = y;
@@ -25,6 +30,11 @@ public class Point implements Shape{
         this.x = x;
     }
 
+    /**
+     * compute distance between this point and {@@code point}
+     * @param point second point
+     * @return length between points
+     */
     public double distanceBetweenPoint(Point point){
         double distOne = (point.getX() - getX()) * (point.getX() - getX());
         double distSecond = (point.getY() - getY()) * (point.getY() - getY());
@@ -40,7 +50,6 @@ public class Point implements Shape{
 
         if (Double.compare(point.x, x) != 0) return false;
         return Double.compare(point.y, y) == 0;
-
     }
 
     @Override
