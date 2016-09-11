@@ -3,7 +3,7 @@ package shapes.entity;
 /**
  * Created by Igor on 01.09.2016.
  */
-public class Point {
+public class Point implements Shape{
     private double x;
     private double y;
 

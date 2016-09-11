@@ -3,7 +3,7 @@ package shapes.entity;
 /**
  * Created by Igor on 01.09.2016.
  */
-public class Segment {
+public class Segment implements Shape{
     private Point firstEnd;
     private Point secondEnd;
 
