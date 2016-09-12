@@ -1,6 +1,7 @@
 package shapes.entity;
 
 import shapes.exception.ShapeException;
+import shapes.option.ShapeOptions;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -8,9 +9,9 @@ import java.util.HashSet;
 
 /**
  * Square class<br>
- *     See also: {@link shapes.option.SquareOption}, {@link Segment}, {@link Point}
+ * See also: {@link Segment}, {@link Point}
  */
-public class Square implements Shape{
+public class Square implements Shape {
     // center point of square
     private Point mPointCenter;
 
@@ -31,16 +32,18 @@ public class Square implements Shape{
 
     /**
      * Create object with default Color Black
+     *
      * @param pPointCenter center point of square
      * @param pPointVertex one of 4 square vertex
      * @throws ShapeException throws if {@code pPointCenter.equals(pPointVertex)}
      */
-    public Square(Point pPointCenter, Point pPointVertex) throws ShapeException{
+    public Square(Point pPointCenter, Point pPointVertex) throws ShapeException {
         this(pPointCenter, pPointVertex, Color.BLACK);
     }
 
     /**
      * Creates copy of {@code pSquare}
+     *
      * @param pSquare source Square object
      * @throws ShapeException
      */
@@ -50,13 +53,14 @@ public class Square implements Shape{
 
     /**
      * create square object
+     *
      * @param pPointCenter center point of square
      * @param pPointVertex one of 4 square vertex
-     * @param pColor color of square
+     * @param pColor       color of square
      * @throws ShapeException
      */
     public Square(Point pPointCenter, Point pPointVertex, Color pColor) throws ShapeException {
-        if ( pPointCenter == null || pPointVertex == null || pColor == null){
+        if (pPointCenter == null || pPointVertex == null || pColor == null) {
             throw new ShapeException(new NullPointerException("Params couldn't be null"));
         }
         if (pPointCenter.equals(pPointVertex)) {
@@ -89,6 +93,14 @@ public class Square implements Shape{
         return mSegments;
     }
 
+    /**
+     *
+     * @return {@link ShapeOptions} object with available operations to this object
+     */
+    public ShapeOptions getSquareOptions() {
+        return new SquareOption(this);
+    }
+
     @Override
     public String toString() {
         return "Square{" +
@@ -111,8 +123,8 @@ public class Square implements Shape{
             return false;
         // Probably incorrect - comparing Object[] arrays with Arrays.equals
         Point point = mVertexes[0];
-        for(Point sqPoint : square.mVertexes){
-            if (sqPoint.equals(point)){
+        for (Point sqPoint : square.mVertexes) {
+            if (sqPoint.equals(point)) {
                 return true;
             }
         }
@@ -128,30 +140,9 @@ public class Square implements Shape{
     }
 
     /**
-     * scale square in {@code pScale} times
-     * @param pScale double value of scale (more than 0)
-     * @throws ShapeException throws when {@code pScale < 0}
+     * compute vertexes coordinates
+     * @param pRadius radius (distance between center and one of the vertex point)
      */
-    public void scale(double pScale) throws ShapeException {
-        if (pScale <= 0) {
-            throw new ShapeException(new IllegalArgumentException("Scale couldn't be less or equal 0"));
-        }
-        mSideLength *= pScale;
-        double R = mSideLength / Math.sqrt(2);
-        initVertexes(R);
-    }
-
-    /**
-     * rotate Square object on {@code pAngle} radians
-     * @param pAngle angle of rotation (in radians)
-     */
-    public void rotate(double pAngle) {
-        for (int i = 0; i < 4; i++) {
-            mAlphas[i] += pAngle;
-        }
-        initVertexes(mSideLength / Math.sqrt(2));
-    }
-
     private void initVertexes(double pRadius) {
         for (int i = 0; i < 4; i++) {
             double x = pRadius * check(Math.cos(mAlphas[i]), 0) + getCenter().getX();
@@ -161,6 +152,11 @@ public class Square implements Shape{
         initSegments();
     }
 
+
+    /**
+     * init all vertexes of square using one of them and center point
+     * @param pPointVertex one of vertex point of square
+     */
     private void initVertexes(Point pPointVertex) {
         mVertexes = new Point[4];
         mAlphas = new double[4];
@@ -173,6 +169,11 @@ public class Square implements Shape{
         initVertexes(R);
     }
 
+    /**
+     * computes angle between Ox and vector (centerPoint, pPoint)
+     * @param pPoint vertex point
+     * @return angle
+     */
     private double computeAngle(Point pPoint) {
         double alpha = Math.PI / 2;
         double diffX = mPointCenter.getX() - pPoint.getX();
@@ -190,6 +191,9 @@ public class Square implements Shape{
         return alpha;
     }
 
+    /**
+     * compute points of square's sides
+     */
     private void initSegments() {
         mSegments = new Segment[4];
         for (int i = 0; i < 4; i++) {
@@ -198,8 +202,7 @@ public class Square implements Shape{
     }
 
     /**
-     *
-     * @param value source value of variable
+     * @param value   source value of variable
      * @param rounded rounded value of variable
      * @return {@code rounded}, if it differs very little from <br>{@code value}, value otherwise
      */
@@ -207,4 +210,56 @@ public class Square implements Shape{
         return Math.abs(value - rounded) < 1.0e-15 ? rounded : value;
     }
 
+    /**
+     * class, that implement {@link ShapeOptions} for {@link Square}
+     */
+    private static class SquareOption implements ShapeOptions {
+        private Square mSquare;
+
+        public SquareOption(Square pSquare) {
+            mSquare = pSquare;
+        }
+
+        /**
+         * rotate Square object on {@code pAngle} radians
+         *
+         * @param pAngle angle of rotation (in radians)
+         */
+        @Override
+        public void rotate(double pAngle) {
+            for (int i = 0; i < 4; i++) {
+                mSquare.mAlphas[i] += pAngle;
+            }
+            mSquare.initVertexes(mSquare.mSideLength / Math.sqrt(2));
+        }
+
+        /**
+         * scale square in {@code pScale} times
+         *
+         * @param pScale double value of scale (more than 0)
+         * @throws ShapeException throws when {@code pScale < 0}
+         */
+        @Override
+        public void scale(double pScale) throws ShapeException {
+            if (pScale <= 0) {
+                throw new ShapeException(new IllegalArgumentException("Scale couldn't be less or equal 0"));
+            }
+            mSquare.mSideLength *= pScale;
+            double R = mSquare.mSideLength / Math.sqrt(2);
+            mSquare.initVertexes(R);
+        }
+
+        @Override
+        public void changeColor(Color color) {
+            mSquare.setColor(color);
+        }
+
+        public Shape getShape() {
+            return mSquare;
+        }
+
+        public void setSquare(Square pSquare) {
+            mSquare = pSquare;
+        }
+    }
 }

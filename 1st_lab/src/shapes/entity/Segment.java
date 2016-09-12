@@ -89,11 +89,4 @@ public class Segment implements Shape{
                 '}';
     }
 
-    public static void main(String... args){
-        Point p1 = new Point(1,0);
-        Point p2 = new Point(0,1);
-        Segment sg1 = new Segment(p1,p2);
-        Segment sg2 = new Segment(p2,p1);
-        System.out.println(sg1.hashCode() == sg2.hashCode());
-    }
 }

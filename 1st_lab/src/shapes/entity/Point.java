@@ -66,8 +66,8 @@ public class Point implements Shape{
     @Override
     public String toString() {
         return "Point{" +
-                "\n\t\tx=" + x +
-                ", \n\t\ty=" + y +
+                " x=" + x +
+                ", y=" + y +
                 '}';
     }
 }
