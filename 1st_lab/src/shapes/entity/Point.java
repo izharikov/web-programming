@@ -31,7 +31,7 @@ public class Point implements Shape{
     }
 
     /**
-     * compute distance between this point and {@@code point}
+     * compute distance between this point and {@code point}
      * @param point second point
      * @return length between points
      */
@@ -66,8 +66,8 @@ public class Point implements Shape{
     @Override
     public String toString() {
         return "Point{" +
-                "x=" + x +
-                ", y=" + y +
+                "\n\t\tx=" + x +
+                ", \n\t\ty=" + y +
                 '}';
     }
 }

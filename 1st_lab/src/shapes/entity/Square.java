@@ -7,7 +7,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 /**
- * Square class
+ * Square class<br>
+ *     See also: {@link shapes.option.SquareOption}, {@link Segment}, {@link Point}
  */
 public class Square implements Shape{
     // center point of square
@@ -91,9 +92,11 @@ public class Square implements Shape{
     @Override
     public String toString() {
         return "Square{" +
-                "mPointCenter=" + mPointCenter +
-                ", mVertexes=" + Arrays.toString(mVertexes) +
-                ", mSideLength=" + mSideLength +
+                "Point Center=" + mPointCenter +
+                ", \n\tVertexes=" + Arrays.toString(mVertexes) +
+                ", \n\tSegments=" + Arrays.toString(mSegments) +
+                ", \n\tSide Length=" + mSideLength +
+                ", \n\tColor=" + mColor +
                 '}';
     }
 

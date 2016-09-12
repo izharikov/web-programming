@@ -80,6 +80,15 @@ public class Segment implements Shape{
         return set.hashCode();
     }
 
+    @Override
+    public String toString() {
+        return "Segment{" +
+                "\n\t\tfirstEnd=" + firstEnd +
+                ", \n\t\tsecondEnd=" + secondEnd +
+                ", \n\t\tLength=" + mLength +
+                '}';
+    }
+
     public static void main(String... args){
         Point p1 = new Point(1,0);
         Point p2 = new Point(0,1);

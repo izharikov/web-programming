@@ -1,7 +1,7 @@
 package shapes.entity;
 
 /**
- * Created by igor on 11.9.16.
+ * Base interface of all shapes
  */
 public interface Shape {
 }

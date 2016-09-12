@@ -1,7 +1,7 @@
 package shapes.exception;
 
 /**
- * Created by Igor on 01.09.2016.
+ * Exception class for shapes
  */
 public class ShapeException extends Exception {
     public ShapeException() {
