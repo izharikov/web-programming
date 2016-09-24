@@ -9,15 +9,22 @@ import java.util.Date;
  */
 public class Composition {
     private String mNameOfComposition;
-    private Duration mDuration;
+    private CompositionDuration mDuration;
     private int mYearOfCreation;
     private int mDaysInTopList;
 
-    public Duration getDuration() {
+    public Composition(String mNameOfComposition, CompositionDuration mDuration, int mYearOfCreation, int mDaysInTopList) {
+        this.mNameOfComposition = mNameOfComposition;
+        this.mDuration = mDuration;
+        this.mYearOfCreation = mYearOfCreation;
+        this.mDaysInTopList = mDaysInTopList;
+    }
+
+    public CompositionDuration getDuration() {
         return mDuration;
     }
 
-    public void setDuration(Duration pDuration) {
+    public void setDuration(CompositionDuration pDuration) {
         mDuration = pDuration;
     }
 
@@ -43,5 +50,39 @@ public class Composition {
 
     public void setDaysInTopList(int pDaysInTopList) {
         mDaysInTopList = pDaysInTopList;
+    }
+
+    @Override
+    public String toString() {
+        return "Composition{" +
+                "mNameOfComposition='" + mNameOfComposition + "\'\n" +
+                ", mDuration = " + mDuration + "\n" +
+                ", mYearOfCreation = " + mYearOfCreation + "\n" +
+                ", mDaysInTopList = " + mDaysInTopList + "\n" +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Composition)) return false;
+
+        Composition that = (Composition) o;
+
+        if (mYearOfCreation != that.mYearOfCreation) return false;
+        if (mDaysInTopList != that.mDaysInTopList) return false;
+        if (mNameOfComposition != null ? !mNameOfComposition.equals(that.mNameOfComposition) : that.mNameOfComposition != null)
+            return false;
+        return mDuration != null ? mDuration.equals(that.mDuration) : that.mDuration == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = mNameOfComposition != null ? mNameOfComposition.hashCode() : 0;
+        result = 31 * result + (mDuration != null ? mDuration.hashCode() : 0);
+        result = 31 * result + mYearOfCreation;
+        result = 31 * result + mDaysInTopList;
+        return result;
     }
 }

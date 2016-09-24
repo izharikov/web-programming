@@ -5,7 +5,7 @@ import recording.entity.Composition;
 /**
  * Created by Igor on 24.09.2016.
  */
-public class CompareCompositionBy {
+public class CompositionCompare {
     public static final CompositionComparator NAME = new CompositionComparator() {
         @Override
         public int compare(Composition o1, Composition o2) {
