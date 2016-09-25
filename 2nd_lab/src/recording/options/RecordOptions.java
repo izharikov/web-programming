@@ -9,19 +9,26 @@ import recording.factory.CompositionFactory;
 import java.util.*;
 
 /**
- * Created by Igor on 24.09.2016.
+ * Options for recording
  */
 public class RecordOptions {
     private static final CompositionFactory compFactory = new CompositionFactory();
     private List<Composition> mCompositions = new LinkedList<>();
 
-    public RecordOptions() {
-    }
-
+    /**
+     * write collection of composition on disk
+     *
+     * @param pCompositions collection of compositions
+     */
     public void writeOnDisk(Collection<? extends Composition> pCompositions) {
         mCompositions.addAll(pCompositions);
     }
 
+    /**
+     * compute overall duration of set of compositions
+     *
+     * @return overall duration
+     */
     public CompositionDuration durationOfWrittenOnDisk() {
         CompositionDuration cd = new CompositionDuration(0);
         for (Composition composition : mCompositions) {
@@ -30,10 +37,21 @@ public class RecordOptions {
         return cd;
     }
 
+    /**
+     * sort compositions
+     *
+     * @param pComparator {@link CompositionComparator}
+     */
     public void sort(CompositionComparator pComparator) {
         sort(pComparator, false);
     }
 
+    /**
+     * sort compositions
+     *
+     * @param pComparator {@link CompositionComparator}
+     * @param reverse     indicate asc or desc mode
+     */
     public void sort(CompositionComparator pComparator, boolean reverse) {
         if (reverse) {
             Collections.sort(mCompositions, Collections.reverseOrder(pComparator));
@@ -42,31 +60,44 @@ public class RecordOptions {
         }
     }
 
+    /**
+     * find Composition by specified params
+     *
+     * @param pParameters Map of parameters
+     * @return finded list of Compositions
+     */
     public List<? extends Composition> find(Map<String, Object> pParameters) {
         List<Composition> result = new LinkedList<>(mCompositions);
         RecordOptions rec = new RecordOptions();
         rec.writeOnDisk(result);
-        handleParameter(rec, pParameters.get("duration"), CompositionCompare.DURATION);
-        handleParameter(rec, pParameters.get("year"), CompositionCompare.YEAR_OF_CREATION);
-        handleParameter(rec, pParameters.get("top"), CompositionCompare.DAYS_IN_TOP);
-        handleEquals(rec, (List<String>)pParameters.get("type"), "type");
-        handleEquals(rec, (List<String>)pParameters.get("name"), "name");
+        handleParameterRange(rec, pParameters.get("duration"), CompositionCompare.DURATION);
+        handleParameterRange(rec, pParameters.get("year"), CompositionCompare.YEAR_OF_CREATION);
+        handleParameterRange(rec, pParameters.get("top"), CompositionCompare.DAYS_IN_TOP);
+        handleListContains(rec, (List<String>) pParameters.get("type"), "type");
+        handleListContains(rec, (List<String>) pParameters.get("name"), "name");
         return rec.mCompositions;
     }
 
-    private void handleEquals(RecordOptions rec, List<String> availableParams, String field){
-        if (rec.mCompositions.size() != 0 &&  availableParams != null && availableParams.size()> 0){
+    /**
+     * find list of Composition, witch specified {@code field} are in {@code availableParams}
+     *
+     * @param rec             modified RecordOptions field
+     * @param availableParams list of possible values of field
+     * @param field           name of field
+     */
+    private static void handleListContains(RecordOptions rec, List<String> availableParams, String field) {
+        if (rec.mCompositions.size() != 0 && availableParams != null && availableParams.size() > 0) {
             List<Composition> result = new ArrayList<>();
-            if ( field.equalsIgnoreCase("name")){
-                for(Composition c : rec.mCompositions){
-                    if ( availableParams.contains(c.getNameOfComposition())) {
+            if (field.equalsIgnoreCase("name")) {
+                for (Composition c : rec.mCompositions) {
+                    if (availableParams.contains(c.getName())) {
                         result.add(c);
                     }
                 }
             }
-            if ( field.equalsIgnoreCase("type")){
-                for(Composition c : rec.mCompositions){
-                    if ( availableParams.contains(c.getType())) {
+            if (field.equalsIgnoreCase("type")) {
+                for (Composition c : rec.mCompositions) {
+                    if (availableParams.contains(c.getType())) {
                         result.add(c);
                     }
                 }
@@ -75,9 +106,16 @@ public class RecordOptions {
         }
     }
 
-    private void handleParameter(RecordOptions rec, Object param, CompositionComparator c) {
+    /**
+     * filters list of Compositions by {@code param}
+     *
+     * @param rec   modified RecordOptions field
+     * @param param Map, that contains min and max keys
+     * @param c     used comporator
+     */
+    private static void handleParameterRange(RecordOptions rec, Object param, CompositionComparator c) {
         if (rec.mCompositions.size() != 0 && param instanceof Map) {
-            Map paramMap = (Map)param;
+            Map paramMap = (Map) param;
             Integer min = (Integer) paramMap.get("min");
             Integer max = (Integer) paramMap.get("max");
             rec.sort(c);
@@ -94,7 +132,14 @@ public class RecordOptions {
         }
     }
 
-    private Composition generateKey(CompositionComparator c, Object value) {
+    /**
+     * generates key for binary search
+     *
+     * @param c     comparator, that will be used in binary search
+     * @param value value, that will used for search
+     * @return Composition object
+     */
+    private static Composition generateKey(CompositionComparator c, Object value) {
         Composition result = null;
         if (c.equals(CompositionCompare.YEAR_OF_CREATION) && value instanceof Integer) {
             result = compFactory.getComposition("rock", null, null, (Integer) value, 0);
@@ -112,6 +157,13 @@ public class RecordOptions {
     }
 
 
+    /**
+     * executes binary search in mCompositions using {@code comparator}
+     *
+     * @param key        searched Composition object
+     * @param comparator CompositionComparator object
+     * @return index of key, or of final element (if there is no key in collection)
+     */
     private int binarySearch(Composition key, CompositionComparator comparator) {
         int end = mCompositions.size() - 1;
         if (comparator.compare(key, mCompositions.get(0)) < 0) {
@@ -120,6 +172,15 @@ public class RecordOptions {
         return binarySearch(key, 0, end, comparator);
     }
 
+    /**
+     * executes binary search in mCompositions using {@code comparator}
+     *
+     * @param key        searched Composition object
+     * @param start      start index
+     * @param end        end index
+     * @param comparator CompositionComparator object
+     * @return index of key, or of final element (if there is no key in collection)
+     */
     private int binarySearch(Composition key, int start, int end, CompositionComparator comparator) {
         if (end - start <= 1) {
             if (comparator.compare(key, mCompositions.get(start)) == 0) {

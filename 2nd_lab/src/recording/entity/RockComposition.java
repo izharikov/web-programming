@@ -1,7 +1,7 @@
 package recording.entity;
 
 /**
- * Created by Igor on 25.09.2016.
+ * Composition with type "Rock"
  */
 public class RockComposition extends CompositionImpl {
     private String type;

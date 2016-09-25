@@ -1,10 +1,11 @@
 package recording.entity;
 
 /**
- * Created by Igor on 25.09.2016.
+ * Composition with type "Pop"
  */
 public class PopComposition extends CompositionImpl {
     private String type;
+
     public PopComposition(String mNameOfComposition, CompositionDuration mDuration, int mYearOfCreation, int mDaysInTopList) {
         super(mNameOfComposition, mDuration, mYearOfCreation, mDaysInTopList);
         type = "Pop";

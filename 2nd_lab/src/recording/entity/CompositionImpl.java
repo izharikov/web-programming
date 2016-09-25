@@ -1,7 +1,7 @@
 package recording.entity;
 
 /**
- * Created by Igor on 24.09.2016.
+ * Base implementation of Composition interface
  */
 public abstract class CompositionImpl implements Composition {
     private String mNameOfComposition;
@@ -24,11 +24,11 @@ public abstract class CompositionImpl implements Composition {
         mDuration = pDuration;
     }
 
-    public String getNameOfComposition() {
+    public String getName() {
         return mNameOfComposition;
     }
 
-    public void setNameOfComposition(String pNameOfComposition) {
+    public void setName(String pNameOfComposition) {
         mNameOfComposition = pNameOfComposition;
     }
 
@@ -51,8 +51,7 @@ public abstract class CompositionImpl implements Composition {
 
     @Override
     public String toString() {
-        String modifiedType = getType().substring(0,1).toUpperCase();
-        return modifiedType + getType().substring(1) + "Composition{" +
+        return getType() + "Composition{" +
                 "mNameOfComposition='" + mNameOfComposition + "\'\n" +
                 ", mDuration = " + mDuration + "\n" +
                 ", mYearOfCreation = " + mYearOfCreation + "\n" +

@@ -3,13 +3,13 @@ package recording.comparator;
 import recording.entity.Composition;
 
 /**
- * Created by Igor on 24.09.2016.
+ * Class, that keeps many comparators for composition interface
  */
 public class CompositionCompare {
     public static final CompositionComparator NAME = new CompositionComparator() {
         @Override
         public int compare(Composition o1, Composition o2) {
-            return o1.getNameOfComposition().compareTo(o2.getNameOfComposition());
+            return o1.getName().compareTo(o2.getName());
         }
     };
 

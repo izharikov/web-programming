@@ -1,16 +1,16 @@
 package recording.entity;
 
 /**
- * Created by Igor on 25.09.2016.
+ * Composition Interface
  */
 public interface Composition {
     CompositionDuration getDuration();
 
-    void setDuration(CompositionDuration pDuration) ;
+    void setDuration(CompositionDuration pDuration);
 
-    String getNameOfComposition();
+    String getName();
 
-    void setNameOfComposition(String pNameOfComposition);
+    void setName(String pNameOfComposition);
 
     int getYearOfCreation();
 

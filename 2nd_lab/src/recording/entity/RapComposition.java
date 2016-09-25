@@ -1,7 +1,7 @@
 package recording.entity;
 
 /**
- * Created by Igor on 25.09.2016.
+ * Composition with type "Rap"
  */
 public class RapComposition extends CompositionImpl {
     private String type;
