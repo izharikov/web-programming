@@ -33,4 +33,11 @@ public class CompositionCompare {
             return o1.getDaysInTopList() - o2.getDaysInTopList();
         }
     };
+
+    public static final CompositionComparator TYPE = new CompositionComparator() {
+        @Override
+        public int compare(Composition o1, Composition o2) {
+            return o1.getType().compareTo(o2.getType());
+        }
+    };
 }
