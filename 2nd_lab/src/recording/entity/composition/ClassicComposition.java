@@ -1,9 +1,11 @@
-package recording.entity;
+package recording.entity.composition;
+
+import recording.entity.duration.CompositionDuration;
 
 /**
  * Composition with type "Classic"
  */
-public class ClassicComposition extends CompositionImpl {
+public class ClassicComposition extends Composition {
     private String type;
 
     public ClassicComposition(String mNameOfComposition, CompositionDuration mDuration, int mYearOfCreation, int mDaysInTopList) {

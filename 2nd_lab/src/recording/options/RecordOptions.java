@@ -1,9 +1,10 @@
 package recording.options;
 
 import recording.comparator.CompositionCompare;
-import recording.entity.Composition;
+import recording.entity.composition.Composition;
 import recording.comparator.CompositionComparator;
-import recording.entity.CompositionDuration;
+import recording.entity.duration.CompositionDuration;
+import recording.exception.RecordingException;
 import recording.factory.CompositionFactory;
 
 import java.util.*;
@@ -13,6 +14,7 @@ import java.util.*;
  */
 public class RecordOptions {
     private static final CompositionFactory compFactory = new CompositionFactory();
+
     private List<Composition> mCompositions = new LinkedList<>();
 
     /**
@@ -29,7 +31,7 @@ public class RecordOptions {
      *
      * @return overall duration
      */
-    public CompositionDuration durationOfWrittenOnDisk() {
+    public CompositionDuration durationOfWrittenOnDisk() throws RecordingException {
         CompositionDuration cd = new CompositionDuration(0);
         for (Composition composition : mCompositions) {
             cd.plus(composition.getDuration());

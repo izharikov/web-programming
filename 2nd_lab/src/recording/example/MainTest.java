@@ -1,6 +1,8 @@
 package recording.example;
 
-import recording.entity.*;
+import recording.entity.composition.*;
+import recording.entity.duration.CompositionDuration;
+import recording.exception.RecordingException;
 import recording.options.RecordOptions;
 
 import java.util.*;
@@ -9,9 +11,9 @@ import java.util.*;
  * Created by Igor on 24.09.2016.
  */
 public class MainTest {
-    public static void main(String... args) {
+    public static void main(String... args) throws RecordingException {
         CompositionDuration durationA = new CompositionDuration(2, 20);
-        Composition compositionA = new RockComposition("A", durationA, 2009, 10);
+        Composition compositionA = new RockComposition("Wait and bleed", durationA, 2009, 10);
         CompositionDuration durationB = new CompositionDuration(4, 0);
         Composition compositionB = new PopComposition("B", durationB, 2014, 20);
         CompositionDuration durationC = new CompositionDuration(3, 40);
@@ -34,6 +36,6 @@ public class MainTest {
         params.put("type", Collections.singletonList("Rock"));
         System.out.println(recordOptions.find(params));
 
-
+        System.out.println(recordOptions.durationOfWrittenOnDisk());
     }
 }

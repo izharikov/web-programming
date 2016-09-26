@@ -1,9 +1,11 @@
-package recording.entity;
+package recording.entity.composition;
+
+import recording.entity.duration.CompositionDuration;
 
 /**
  * Composition with type "Pop"
  */
-public class PopComposition extends CompositionImpl {
+public class PopComposition extends Composition {
     private String type;
 
     public PopComposition(String mNameOfComposition, CompositionDuration mDuration, int mYearOfCreation, int mDaysInTopList) {

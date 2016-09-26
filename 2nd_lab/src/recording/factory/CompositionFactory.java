@@ -1,6 +1,7 @@
 package recording.factory;
 
-import recording.entity.*;
+import recording.entity.composition.*;
+import recording.entity.duration.CompositionDuration;
 
 /**
  * Class, that creates compositions depends on type of it

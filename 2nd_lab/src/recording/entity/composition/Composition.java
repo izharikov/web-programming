@@ -1,15 +1,18 @@
-package recording.entity;
+package recording.entity.composition;
+
+import recording.entity.duration.CompositionDuration;
 
 /**
  * Base implementation of Composition interface
  */
-public abstract class CompositionImpl implements Composition {
+public abstract class Composition {
     private String mNameOfComposition;
     private CompositionDuration mDuration;
     private int mYearOfCreation;
     private int mDaysInTopList;
+    protected String type;
 
-    public CompositionImpl(String mNameOfComposition, CompositionDuration mDuration, int mYearOfCreation, int mDaysInTopList) {
+    public Composition(String mNameOfComposition, CompositionDuration mDuration, int mYearOfCreation, int mDaysInTopList) {
         this.mNameOfComposition = mNameOfComposition;
         this.mDuration = mDuration;
         this.mYearOfCreation = mYearOfCreation;
@@ -48,23 +51,26 @@ public abstract class CompositionImpl implements Composition {
         mDaysInTopList = pDaysInTopList;
     }
 
+    public abstract String getType() ;
 
+    public abstract void setType(String type);
     @Override
     public String toString() {
         return getType() + "Composition{" +
-                "mNameOfComposition='" + mNameOfComposition + "\'\n" +
-                ", mDuration = " + mDuration + "\n" +
-                ", mYearOfCreation = " + mYearOfCreation + "\n" +
-                ", mDaysInTopList = " + mDaysInTopList + "\n" +
+                "\n\tNameOfComposition='" + mNameOfComposition + "\',\n" +
+                "\tDuration = " + mDuration + ",\n" +
+                "\tYearOfCreation = " + mYearOfCreation + ".\n" +
+                "\tDaysInTopList = " + mDaysInTopList + "\n" +
+                "\tType = " + getType() + "\n" +
                 '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof CompositionImpl)) return false;
+        if (!(o instanceof Composition)) return false;
 
-        CompositionImpl that = (CompositionImpl) o;
+        Composition that = (Composition) o;
 
         if (mYearOfCreation != that.mYearOfCreation) return false;
         if (mDaysInTopList != that.mDaysInTopList) return false;

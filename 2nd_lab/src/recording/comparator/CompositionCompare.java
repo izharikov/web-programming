@@ -1,11 +1,14 @@
 package recording.comparator;
 
-import recording.entity.Composition;
+import recording.entity.composition.Composition;
 
 /**
  * Class, that keeps many comparators for composition interface
  */
 public class CompositionCompare {
+    /**
+     * compare compositions by name
+     */
     public static final CompositionComparator NAME = new CompositionComparator() {
         @Override
         public int compare(Composition o1, Composition o2) {
@@ -13,6 +16,9 @@ public class CompositionCompare {
         }
     };
 
+    /**
+     * compare compositions by duration
+     */
     public static final CompositionComparator DURATION = new CompositionComparator() {
         @Override
         public int compare(Composition o1, Composition o2) {
@@ -20,6 +26,9 @@ public class CompositionCompare {
         }
     };
 
+    /**
+     * compare compositions by year of creation
+     */
     public static final CompositionComparator YEAR_OF_CREATION = new CompositionComparator() {
         @Override
         public int compare(Composition o1, Composition o2) {
@@ -27,6 +36,9 @@ public class CompositionCompare {
         }
     };
 
+    /**
+     * compare compositions by days in top
+     */
     public static final CompositionComparator DAYS_IN_TOP = new CompositionComparator() {
         @Override
         public int compare(Composition o1, Composition o2) {
@@ -34,6 +46,9 @@ public class CompositionCompare {
         }
     };
 
+    /**
+     * compare compositions by type
+     */
     public static final CompositionComparator TYPE = new CompositionComparator() {
         @Override
         public int compare(Composition o1, Composition o2) {

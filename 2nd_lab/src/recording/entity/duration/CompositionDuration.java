@@ -1,4 +1,6 @@
-package recording.entity;
+package recording.entity.duration;
+
+import recording.exception.RecordingException;
 
 import java.time.Duration;
 
@@ -9,15 +11,18 @@ import java.time.Duration;
 public class CompositionDuration implements Comparable<CompositionDuration> {
     private Duration mDuration;
 
-    public CompositionDuration(long hours, long minutes, long seconds) {
+    public CompositionDuration(long hours, long minutes, long seconds) throws RecordingException{
+        if ( hours < 0 || minutes < 0 || seconds < 0 ){
+            throw new RecordingException(new IllegalArgumentException("h, min or sec can't be less than 0"));
+        }
         mDuration = Duration.ofHours(hours).plusMinutes(minutes).plusSeconds(seconds);
     }
 
-    public CompositionDuration(long minutes, long seconds) {
+    public CompositionDuration(long minutes, long seconds) throws RecordingException {
         this(0, minutes, seconds);
     }
 
-    public CompositionDuration(long seconds) {
+    public CompositionDuration(long seconds) throws RecordingException {
         this(0, seconds);
     }
 

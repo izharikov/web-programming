@@ -1,6 +1,6 @@
 package recording.comparator;
 
-import recording.entity.Composition;
+import recording.entity.composition.Composition;
 
 
 import java.util.Comparator;

@@ -1,9 +1,11 @@
-package recording.entity;
+package recording.entity.composition;
+
+import recording.entity.duration.CompositionDuration;
 
 /**
  * Composition with type "Rock"
  */
-public class RockComposition extends CompositionImpl {
+public class RockComposition extends Composition {
     private String type;
 
     public RockComposition(String mNameOfComposition, CompositionDuration mDuration, int mYearOfCreation, int mDaysInTopList) {

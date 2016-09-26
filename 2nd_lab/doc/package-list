@@ -1,5 +1,7 @@
 recording.comparator
-recording.entity
+recording.entity.composition
+recording.entity.duration
 recording.example
+recording.exception
 recording.factory
 recording.options
