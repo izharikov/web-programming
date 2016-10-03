@@ -110,10 +110,4 @@ public class CompositionsEntity {
         return result;
     }
 
-    public Composition generateComposition(){
-        CompositionDuration dur = CompositionDuration.generateDurationFromString(getDuration());
-        return new CompositionFactory().getComposition(getType(), getNameOfComposition(), dur,
-                getYearOfCreation(), getDaysInTopList());
-    }
-
 }

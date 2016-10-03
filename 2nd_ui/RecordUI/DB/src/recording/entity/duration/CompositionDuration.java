@@ -55,23 +55,4 @@ public class CompositionDuration implements Comparable<CompositionDuration> {
         return mDuration.compareTo(o.mDuration);
     }
 
-    public static CompositionDuration generateDurationFromString(String pStringDuration) {
-        String[] array = pStringDuration.split(" ");
-        try {
-            CompositionDuration duration = new CompositionDuration(0);
-            for (String component : array) {
-                int l = component.length();
-                if (component.endsWith("s")) {
-                    duration.plus(new CompositionDuration(Long.parseLong(component.substring(0, l - 1))));
-                } else if (component.endsWith("m")){
-                    duration.plus(new CompositionDuration(Long.parseLong(component.substring(0, l - 1)), 0));
-                }else if ( component.endsWith("h")){
-                    duration.plus(new CompositionDuration(Long.parseLong(component.substring(0, l - 1)), 0, 0));
-                }
-            }
-            return duration;
-        } catch (RecordingException e) {
-            return null;
-        }
-    }
 }

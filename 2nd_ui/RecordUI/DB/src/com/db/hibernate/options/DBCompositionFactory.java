@@ -1,6 +1,8 @@
 package com.db.hibernate.options;
 
 import com.db.hibernate.entity.CompositionsEntity;
+
+import options.CompositionAdapter;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -9,6 +11,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
+import recording.comparator.CompositionCompare;
 import recording.entity.composition.Composition;
 
 import java.util.ArrayList;
@@ -45,7 +48,7 @@ public class DBCompositionFactory {
             Query query = session.createQuery("from " + CompositionsEntity.class.getSimpleName());
             List<CompositionsEntity> entities = query.list();
             for (CompositionsEntity entity : entities) {
-                compositions.add(entity.generateComposition());
+                compositions.add(CompositionAdapter.generateComposition(entity));
             }
         } finally {
             session.close();

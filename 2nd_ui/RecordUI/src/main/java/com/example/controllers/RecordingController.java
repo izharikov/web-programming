@@ -4,7 +4,7 @@ package com.example.controllers;
 import com.db.hibernate.entity.CompositionsEntity;
 import com.db.hibernate.options.DBCompositionFactory;
 import com.example.RecordUiApplication;
-import com.example.adapter.CompositionAdapter;
+import options.CompositionAdapter;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
