@@ -9,4 +9,5 @@ import java.util.Comparator;
  */
 public interface WordComparator extends Comparator<Word> {
     char getCharToCompare();
+    WordComparator setCharToCompare(char c);
 }

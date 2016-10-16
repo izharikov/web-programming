@@ -7,6 +7,12 @@ import java.util.List;
  */
 public class Sentence {
     private List<Word> mWords;
+    private String mSourceSentence;
+
+    public Sentence(List<Word> pWords, String pSourceSentence) {
+        mWords = pWords;
+        mSourceSentence = pSourceSentence;
+    }
 
     public List<Word> getWords() {
         return mWords;
@@ -14,6 +20,14 @@ public class Sentence {
 
     public void setWords(List<Word> pWords) {
         mWords = pWords;
+    }
+
+    public String getSourceSentence() {
+        return mSourceSentence;
+    }
+
+    public void setSourceSentence(String pSourceSentence) {
+        mSourceSentence = pSourceSentence;
     }
 
     @Override
@@ -25,6 +39,11 @@ public class Sentence {
 
         return mWords != null ? mWords.equals(sentence.mWords) : sentence.mWords == null;
 
+    }
+
+    @Override
+    public String toString() {
+        return mSourceSentence;
     }
 
     @Override
