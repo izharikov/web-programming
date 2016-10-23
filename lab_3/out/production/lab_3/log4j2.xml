@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <File name="MyFile" fileName="/home/igor/university/3rd/web-programming/lab_3/log4j/log1.out" immediateFlush="false" append="false">
+            <PatternLayout pattern="%-5p [%t]: %m%n"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="MyFile"/>
+        </Root>
+        <Root level="error">
+            <AppenderRef ref="MyFile"/>
+        </Root>
+    </Loggers>
+</Configuration>

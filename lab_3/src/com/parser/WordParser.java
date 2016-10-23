@@ -1,12 +1,10 @@
 package com.parser;
 
 import com.constants.Constants;
+import com.exception.TextParseException;
 import com.string.Word;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,12 +15,12 @@ import java.util.regex.Matcher;
  */
 public class WordParser implements Constants{
 
-    public static List<Word> parse(String pSentence){
+    public static List<Word> parse(String pSourceString){
         List<Word> words = new ArrayList<>();
-        Matcher wordMatcher = WORD_PATTERN.matcher(pSentence.trim());
+        Matcher wordMatcher = WORD_PATTERN.matcher(pSourceString.trim());
         while(wordMatcher.find()){
             String stringWord = wordMatcher.group().trim();
-            words.add(new Word(stringWord));
+            words.add(new Word(stringWord.toLowerCase()));
         }
         return words;
     }
@@ -40,7 +38,7 @@ public class WordParser implements Constants{
         return parse(result);
     }
 
-    public static List<Word> parse(File pFile){
+    public static List<Word> parse(File pFile) throws TextParseException {
         try {
             InputStream inputStream = new FileInputStream(pFile);
             List<Word> res = parse(inputStream);
@@ -48,7 +46,7 @@ public class WordParser implements Constants{
             return res;
         }
         catch (IOException e){
-            return null;
+            throw new TextParseException(e);
         }
     }
 }

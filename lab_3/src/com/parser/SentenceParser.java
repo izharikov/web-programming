@@ -1,8 +1,8 @@
 package com.parser;
 
 import com.constants.Constants;
+import com.exception.TextParseException;
 import com.string.Sentence;
-import com.string.Word;
 import org.jsoup.Jsoup;
 
 import java.io.*;
@@ -41,7 +41,7 @@ public class SentenceParser implements Constants{
     }
 
 
-    public static List<Sentence> parse(URL pUrl){
+    public static List<Sentence> parse(URL pUrl) throws TextParseException {
         try {
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(pUrl.openStream()));
@@ -54,11 +54,11 @@ public class SentenceParser implements Constants{
             return parse(Jsoup.parse(strb.toString()).text());
         }
         catch (IOException e){
-            return null;
+            throw new TextParseException(e);
         }
     }
 
-    public static List<Sentence> parse(File pFile){
+    public static List<Sentence> parse(File pFile) throws TextParseException {
         try {
             InputStream inputStream = new FileInputStream(pFile);
             List<Sentence> result = parse(inputStream);
@@ -66,18 +66,8 @@ public class SentenceParser implements Constants{
             return result;
         }
         catch (IOException e){
-            return null;
+            throw new TextParseException(e);
         }
     }
 
-    public static void main(String... args) throws IOException{
-        File f = new File("test.txt");
-        List<Sentence> sentences = parse(f);
-        if (sentences != null) {
-            for (Sentence s : sentences) {
-                System.out.println(s);
-                System.out.println("--------------------------------");
-            }
-        }
-    }
 }

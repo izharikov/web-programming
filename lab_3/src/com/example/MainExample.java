@@ -1,33 +1,80 @@
 package com.example;
 
+import com.exception.TextParseException;
+import com.messages.MessageByLocale;
 import com.parser.SentenceParser;
 import com.parser.WordParser;
 import com.string.Sentence;
 import com.string.Word;
-import com.string.comparator.WordComparatorByChar;
 import com.string.info.WordInfo;
 import com.text.TextHandler;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Ihar Zharykau
  */
 public class MainExample {
-    private static final String FILE_NAME = "test.txt";
+    static Logger log = LogManager.getLogger(MainExample.class.getName());
 
-    public static void main(String... args) {
+    private static final TextHandler TEXT_HANDLER = new TextHandler();
 
-        List<Sentence> sentences = SentenceParser.parse(new File(FILE_NAME));
+    public static void main(String... args){
+        Locale curLocale = new Locale("en");
+        Scanner input = new Scanner(System.in);
+        MessageByLocale messages = new MessageByLocale(curLocale);
+        System.out.println(messages.getChooseOperationMessage());
+        String operation = input.nextLine();
+        try {
+            switch (operation) {
+                case "1":
+                    executeFirst(input, messages);
+                    break;
+                case "2":
+                    executeSecond(input, messages);
+                    break;
+                default:
+
+            }
+        }
+        catch (TextParseException e){
+            log.error(e.getMessage());
+            System.err.println("Error while parse text!");
+        }
+        finally {
+            input.close();
+        }
+    }
+
+    private static void executeFirst(Scanner input, MessageByLocale messages) throws TextParseException {
+        System.out.println(messages.getInputFileNameMessage());
+        String fileName = input.nextLine();
+        System.out.println(messages.getInputCharacterMessage());
+        String character = input.nextLine().substring(0, 1);
+        List<Word> words = WordParser.parse(new File(fileName));
+        TEXT_HANDLER.sortByChar(character.charAt(0), words);
+        System.out.println(messages.getResultMessage());
+        System.out.println(words);
+    }
+
+    private static void executeSecond(Scanner input, MessageByLocale messages) throws TextParseException {
+        System.out.println(messages.getInputFileNameMessage());
+        String fileName = input.nextLine();
+        System.out.println(messages.getInputStringArrayMessage());
         Set<Word> words = new HashSet<>();
-        words.add(new Word("hello"));
-        words.add(new Word("bye"));
-        words.add(new Word("world"));
-        words.add(new Word("man"));
-        WordInfo wi = new WordInfo(words);
-        new TextHandler().sortByCountInText(wi, sentences);
-        for(Map.Entry<Word, Integer> entry : wi.entrySet()){
+        words.addAll(Arrays.asList(input.nextLine().split(" ")).stream()
+                .map(Word::new)
+                .collect(Collectors.toCollection(ArrayList::new))
+        );
+        WordInfo wordInfo = new WordInfo(words);
+        List<Sentence> sentences = SentenceParser.parse(new File(fileName));
+        new TextHandler().sortByCountInText(wordInfo, sentences);
+        System.out.println(messages.getResultMessage());
+        for (Map.Entry<Word, Integer> entry : wordInfo.entrySet()) {
             System.out.println(entry.getKey() + " : " + entry.getValue());
         }
     }

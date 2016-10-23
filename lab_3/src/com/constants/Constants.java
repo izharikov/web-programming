@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  */
 public interface Constants {
     Pattern SENTENCE_PATTERN = Pattern.compile("[^.!?]+");
-    Pattern WORD_PATTERN = Pattern.compile("([\\$]{0,1}[\\w]+['-]{0,1})+");
+    Pattern WORD_PATTERN = Pattern.compile("([\\$]{0,1}[\\w\\p{IsCyrillic}]+['-]{0,1})+");
     String REPLACE_SPACE_SEQ = "[ ]+";
     String REPLACE_TAB_SEQ = "[\t]+";
 }
