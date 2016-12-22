@@ -7,6 +7,7 @@ import recording.entity.duration.CompositionDuration;
 import recording.exception.RecordingException;
 import recording.factory.CompositionFactory;
 
+import java.time.Duration;
 import java.util.*;
 
 /**
@@ -24,6 +25,10 @@ public class RecordOptions {
      */
     public void writeOnDisk(Collection<? extends Composition> pCompositions) {
         mCompositions.addAll(pCompositions);
+    }
+
+    public void writeCompositionOnDisk(Composition pComposition){
+        mCompositions.add(pComposition);
     }
 
     /**
@@ -68,7 +73,7 @@ public class RecordOptions {
      * @param pParameters Map of parameters
      * @return finded list of Compositions
      */
-    public List<? extends Composition> find(Map<String, Object> pParameters) {
+    public List<Composition> find(Map<String, Object> pParameters) {
         List<Composition> result = new LinkedList<>(mCompositions);
         RecordOptions rec = new RecordOptions();
         rec.writeOnDisk(result);
@@ -117,19 +122,42 @@ public class RecordOptions {
      */
     private static void handleParameterRange(RecordOptions rec, Object param, CompositionComparator c) {
         if (rec.mCompositions.size() != 0 && param instanceof Map) {
-            Map paramMap = (Map) param;
-            Integer min = (Integer) paramMap.get("min");
-            Integer max = (Integer) paramMap.get("max");
-            rec.sort(c);
-            Composition key = generateKey(c, min);
-            int left = rec.binarySearch(key, c);
-            key = generateKey(c, max);
-            int right = rec.binarySearch(key, c);
-            if (left < right) {
-                rec.mCompositions = rec.mCompositions.subList(left, right);
+            if ( !c.equals(CompositionCompare.DURATION)) {
+                Map paramMap = (Map) param;
+                Integer min = (Integer) paramMap.get("min");
+                Integer max = (Integer) paramMap.get("max");
+                rec.sort(c);
+                Composition key = generateKey(c, min);
+                int left = rec.binarySearch(key, c);
+                key = generateKey(c, max);
+                int right = rec.binarySearch(key, c);
+                if (left < right) {
+                    rec.mCompositions = rec.mCompositions.subList(left, right);
+                }
+                if ( left == right && left > -1 && left < rec.mCompositions.size()){
+                    List<Composition> list = new ArrayList<>();
+                    list.add(rec.mCompositions.get(left));
+                    rec.mCompositions = list;
+                }
+                if (left > right) {
+                    rec.mCompositions = Collections.EMPTY_LIST;
+                }
             }
-            if (left == right) {
-                rec.mCompositions = Collections.EMPTY_LIST;
+            else{
+                Map paramMap = (Map) param;
+                CompositionDuration min = (CompositionDuration) paramMap.get("min");
+                CompositionDuration max = (CompositionDuration) paramMap.get("max");
+                rec.sort(c);
+                Composition key = generateKey(c, min);
+                int left = rec.binarySearch(key, c);
+                key = generateKey(c, max);
+                int right = rec.binarySearch(key, c);
+                if (left <= right) {
+                    rec.mCompositions = rec.mCompositions.subList(left, right);
+                }
+                if (left > right) {
+                    rec.mCompositions = Collections.EMPTY_LIST;
+                }
             }
         }
     }

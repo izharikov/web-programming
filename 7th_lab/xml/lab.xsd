@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://fpmi.bsu.by"
+           xmlns="http://fpmi.bsu.by"
+           elementFormDefault="qualified">
+
+    <xs:element name="compositions">
+        <xs:complexType>
+            <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="composition">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="type" type="xs:string"/>
+                            <xs:element name="name" type="xs:string"/>
+                            <xs:element name="year" type="xs:integer"/>
+                            <xs:element name="days-in-top" type="xs:integer"/>
+                            <xs:element name="duration" type="duration"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="duration">
+        <xs:attribute name="hours" type="xs:integer" default="0" use="optional"/>
+        <xs:attribute name="min" type="xs:integer" default="0" use="optional"/>
+        <xs:attribute name="sec" type="xs:integer" default="0" use="optional"/>
+    </xs:complexType>
+</xs:schema>

@@ -1,0 +1,42 @@
+apply plugin: 'idea'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+//apply plugin: 'eclipse'
+//apply plugin: 'spring-boot'
+apply plugin: 'war'
+
+war {
+    webAppDirName = 'web'
+    baseName = 'spring'
+    destinationDir = file('tomcat/webapps')
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    compile("org.springframework.boot:spring-boot-devtools")
+}
+
+task clean(type: Delete){
+    delete 'tomact/webapps'
+}
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+//dependencies {
+//    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+//    compile("org.springframework.boot:spring-boot-devtools")
+//    testCompile("junit:junit")
+//}

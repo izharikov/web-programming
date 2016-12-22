@@ -1,0 +1,8 @@
+16:27:22.821 [main] INFO  rmi.server.main.ServerMain - Starting server
+16:27:23.453 [main] INFO  rmi.server.main.ServerMain - Server started successfully
+16:36:35.164 [RMI TCP Connection(5)-127.0.0.1] DEBUG recording.options.RecordOptions - Generation key
+16:36:35.164 [RMI TCP Connection(5)-127.0.0.1] DEBUG recording.options.RecordOptions - Generation key
+16:36:37.865 [RMI TCP Connection(5)-127.0.0.1] DEBUG recording.options.RecordOptions - Generation key
+16:36:37.865 [RMI TCP Connection(5)-127.0.0.1] DEBUG recording.options.RecordOptions - Generation key
+17:06:11.903 [RMI TCP Connection(17)-127.0.0.1] DEBUG recording.options.RecordOptions - Generation key
+17:06:11.904 [RMI TCP Connection(17)-127.0.0.1] DEBUG recording.options.RecordOptions - Generation key

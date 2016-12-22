@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<compositions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns="http://fpmi.bsu.by" xsi:schemaLocation="http://fpmi.bsu.by lab.xsd">
+    <composition>
+        <type>Rock</type>
+        <name>Wait And Bleed</name>
+        <year>2000</year>
+        <days-in-top>300</days-in-top>
+        <duration min="4" sec="2"/>
+    </composition>
+
+    <composition>
+        <type>Classic</type>
+        <name>Mozart 5th Symphony</name>
+        <year>1450</year>
+        <days-in-top>1000</days-in-top>
+        <duration min="5" sec="2"/>
+    </composition>
+
+    <composition>
+        <type>Rap</type>
+        <name>Eminem : I'm not afraid</name>
+        <year>2004</year>
+        <days-in-top>200</days-in-top>
+        <duration min="3" sec="43"/>
+    </composition>
+
+</compositions>

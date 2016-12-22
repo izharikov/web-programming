@@ -2,13 +2,21 @@ package recording.entity.duration;
 
 import recording.exception.RecordingException;
 
+import java.io.Serializable;
 import java.time.Duration;
 
 
 /**
  * Duration for music composition
  */
-public class CompositionDuration implements Comparable<CompositionDuration> {
+public class CompositionDuration implements Comparable<CompositionDuration>, Serializable {
+    public static CompositionDuration ZERO_DUR;
+    static{
+        try {
+            ZERO_DUR = new CompositionDuration(0);
+        }
+        catch (RecordingException e){}
+    }
     private Duration mDuration;
 
     public CompositionDuration(long hours, long minutes, long seconds) throws RecordingException {
@@ -49,6 +57,21 @@ public class CompositionDuration implements Comparable<CompositionDuration> {
         return strb.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CompositionDuration that = (CompositionDuration) o;
+
+        return mDuration != null ? mDuration.equals(that.mDuration) : that.mDuration == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return mDuration != null ? mDuration.hashCode() : 0;
+    }
 
     @Override
     public int compareTo(CompositionDuration o) {

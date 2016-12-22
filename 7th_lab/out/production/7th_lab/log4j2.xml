@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+        <File name="INFO_FILE" fileName="/home/igor/university/3rd/web-programming/7th_lab/log/info.log" immediateFlush="true" append="false">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+        <File name="DEBUG_FILE" fileName="/home/igor/university/3rd/web-programming/7th_lab/log/debug.log" immediateFlush="true" append="false">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+        <File name="ERROR_FILE" fileName="/home/igor/university/3rd/web-programming/7th_lab/log/error.log" immediateFlush="true" append="false">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="ALL">
+            <AppenderRef ref="INFO_FILE" level="info"/>
+            <AppenderRef ref="DEBUG_FILE" level="debug" />
+            <AppenderRef ref="ERROR_FILE" level="error"/>
+        </Root>
+    </Loggers>
+</Configuration>

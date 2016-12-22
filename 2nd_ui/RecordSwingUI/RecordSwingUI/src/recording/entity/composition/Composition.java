@@ -2,10 +2,12 @@ package recording.entity.composition;
 
 import recording.entity.duration.CompositionDuration;
 
+import java.io.Serializable;
+
 /**
  * Base implementation of Composition interface
  */
-public abstract class Composition {
+public abstract class Composition implements Serializable{
     private String mNameOfComposition;
     private CompositionDuration mDuration;
     private int mYearOfCreation;
