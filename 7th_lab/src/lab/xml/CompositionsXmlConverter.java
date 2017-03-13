@@ -25,7 +25,14 @@ public class CompositionsXmlConverter {
             List<Composition> compositions = new ArrayList<>();
             SAXCompositionsHandler handler = new SAXCompositionsHandler(compositions);
             parser.parse(is, handler);
+            System.out.println("---- SAX ------");
             System.out.println(compositions);
+            System.out.println("---- StAX ------");
+            StAXCompositionsParser staxParser = new StAXCompositionsParser();
+            System.out.println(staxParser.parseCompositions(XML_FILE_NAME));
+            System.out.println("----- DOM -------");
+            DOMCompositionsParser domParser = new DOMCompositionsParser();
+            System.out.println(domParser.parse(XML_FILE_NAME));
         }
     }
 }

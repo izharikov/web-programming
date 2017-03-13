@@ -1,0 +1,50 @@
+h1 {
+    color: #2f79ff;
+    font-size: 20px
+}
+
+TABLE {
+    border-width: 18px;
+    border-style: inset;
+    border-color: #FFAA00
+}
+
+th {
+    color: #800800;
+    font-size: 14pt;
+    border: double 5px #a41fac;
+}
+
+td {
+    color: #ff0800;
+    font-family: CALIBRI;
+    font-size: 10pt;
+    border: 4px dotted #CCff00;
+}
+
+th {
+    color: #800800;
+    font-family: CALIBRI;
+    font-size: 14pt
+}
+
+td {
+    color: #ff0800;
+    font-family: CALIBRI;
+    font-size: 10pt
+}
+
+{
+    color: ff0800
+;
+    font-family: CALIBRI
+;
+    font-size: 10pt
+}
+TABLE {
+    color: FFC0C0;
+    font-family: CALIBRI;
+    font-size: 104pt;
+    border: 2;
+    BORDERCOLOR = ffff00
+}

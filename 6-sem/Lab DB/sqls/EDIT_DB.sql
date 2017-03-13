@@ -1,0 +1,10 @@
+CREATE TABLE author_tbl (
+  id   INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(256)
+);
+
+ALTER TABLE book_tbl
+  ADD COLUMN autor_id INT,
+  ADD CONSTRAINT FOREIGN KEY book_tbl_autor_fk(autor_id) REFERENCES author_tbl (id)
+  ON UPDATE CASCADE
+  ON DELETE RESTRICT;

@@ -7,6 +7,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import recording.entity.composition.Composition;
 import recording.entity.duration.CompositionDuration;
+import recording.exception.RecordingException;
 import recording.factory.CompositionFactory;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -19,7 +20,7 @@ import java.util.List;
  * @author Ihar Zharykau
  */
 public class DOMCompositionsParser {
-    public void parse(String fileName) throws Exception {
+    public List<Composition> parse(String fileName) throws Exception {
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(new File(fileName));
@@ -35,26 +36,30 @@ public class DOMCompositionsParser {
                 int year = Integer.parseInt(eElement.getElementsByTagName("year").item(0).getTextContent());
                 int daysInTop = Integer.parseInt(eElement.getElementsByTagName("days-in-top").item(0).getTextContent());
                 Element durElement = (Element) eElement.getElementsByTagName("duration").item(0);
-                long s = 0;
-                long h = 0;
-                long m = 0;
-                String sStr = durElement.getAttribute("sec");
-                String mStr = durElement.getAttribute("min");
-                String hStr = durElement.getAttribute("hours");
-                if ( sStr != null && sStr.length() > 0) {
-                    s = Long.parseLong(sStr);
-                }
-                if ( mStr != null && mStr.length() > 0) {
-                    m = Long.parseLong(mStr);
-                }
-                if ( hStr != null && hStr.length() > 0) {
-                    h = Long.parseLong(hStr);
-                }
-                CompositionDuration cd = new CompositionDuration(h, m, s);
+                CompositionDuration cd = getDurationFromElement(durElement);
                 compositions.add(CompositionFactory.instance().getComposition(type, name, cd, year, daysInTop));
             }
         }
-        System.out.println(compositions);
+        return compositions;
+    }
+
+    private CompositionDuration getDurationFromElement(Element durElement) throws RecordingException{
+        long s = 0;
+        long h = 0;
+        long m = 0;
+        String sStr = durElement.getAttribute("sec");
+        String mStr = durElement.getAttribute("min");
+        String hStr = durElement.getAttribute("hours");
+        if ( sStr != null && sStr.length() > 0) {
+            s = Long.parseLong(sStr);
+        }
+        if ( mStr != null && mStr.length() > 0) {
+            m = Long.parseLong(mStr);
+        }
+        if ( hStr != null && hStr.length() > 0) {
+            h = Long.parseLong(hStr);
+        }
+        return new CompositionDuration(h, m, s);
     }
 
     public static void main(String... args) throws Exception {

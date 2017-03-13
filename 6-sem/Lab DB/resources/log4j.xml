@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration debug="false"
+                     xmlns:log4j='http://jakarta.apache.org/log4j/'>
+    <appender name="JPA_LOG" class="org.apache.log4j.RollingFileAppender">
+        <param name="append" value="false" />
+        <param name="file" value="/home/igor/university/3rd/web-programming/6-sem/Lab DB/log/jpa.log" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+        </layout>
+    </appender>
+    <appender name="EJB_LOG" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%m" />
+        </layout>
+    </appender>
+    <logger name="org.hibernate">
+        <appender-ref ref="JPA_LOG" />
+    </logger>
+    <root>
+        <appender-ref ref="EJB_LOG" />
+    </root>
+</log4j:configuration>

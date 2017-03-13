@@ -1,3 +1,39 @@
-22:40:04.011 [main] DEBUG lab.xml.CompositionsBaseXMLUtils - set duration : 4min 2s 
-22:40:04.014 [main] DEBUG lab.xml.CompositionsBaseXMLUtils - set duration : 5min 2s 
-22:40:04.015 [main] DEBUG lab.xml.CompositionsBaseXMLUtils - set duration : 3min 43s 
+13:27:57.631 [main] DEBUG lab.xml.SAXCompositionsHandler - Set value : Rock for property : type
+13:27:57.635 [main] DEBUG lab.xml.SAXCompositionsHandler - Set value : Wait And Bleed for property : name
+13:27:57.635 [main] DEBUG lab.xml.SAXCompositionsHandler - Set value : 2000 for property : year
+13:27:57.635 [main] DEBUG lab.xml.SAXCompositionsHandler - Set value : 300 for property : days-in-top
+13:27:57.636 [main] DEBUG lab.xml.CompositionsBaseXMLUtils - set duration : 4min 2s 
+13:27:57.637 [main] DEBUG lab.xml.SAXCompositionsHandler - Added composition : RockComposition{
+	NameOfComposition='Wait And Bleed',
+	Duration = 4min 2s ,
+	YearOfCreation = 2000.
+	DaysInTopList = 300
+	Type = Rock
+}
+13:27:57.637 [main] DEBUG lab.xml.SAXCompositionsHandler - Set value : Classic for property : type
+13:27:57.637 [main] DEBUG lab.xml.SAXCompositionsHandler - Set value : Mozart 5th Symphony for property : name
+13:27:57.638 [main] DEBUG lab.xml.SAXCompositionsHandler - Set value : 1450 for property : year
+13:27:57.638 [main] DEBUG lab.xml.SAXCompositionsHandler - Set value : 1000 for property : days-in-top
+13:27:57.638 [main] DEBUG lab.xml.CompositionsBaseXMLUtils - set duration : 5min 2s 
+13:27:57.638 [main] DEBUG lab.xml.SAXCompositionsHandler - Added composition : ClassicComposition{
+	NameOfComposition='Mozart 5th Symphony',
+	Duration = 5min 2s ,
+	YearOfCreation = 1450.
+	DaysInTopList = 1000
+	Type = Classic
+}
+13:27:57.638 [main] DEBUG lab.xml.SAXCompositionsHandler - Set value : Rap for property : type
+13:27:57.638 [main] DEBUG lab.xml.SAXCompositionsHandler - Set value : Eminem : I'm not afraid for property : name
+13:27:57.639 [main] DEBUG lab.xml.SAXCompositionsHandler - Set value : 2004 for property : year
+13:27:57.639 [main] DEBUG lab.xml.SAXCompositionsHandler - Set value : 200 for property : days-in-top
+13:27:57.639 [main] DEBUG lab.xml.CompositionsBaseXMLUtils - set duration : 3min 43s 
+13:27:57.639 [main] DEBUG lab.xml.SAXCompositionsHandler - Added composition : RapComposition{
+	NameOfComposition='Eminem : I'm not afraid',
+	Duration = 3min 43s ,
+	YearOfCreation = 2004.
+	DaysInTopList = 200
+	Type = Rap
+}
+13:27:57.643 [main] DEBUG lab.xml.CompositionsBaseXMLUtils - set duration : 4min 2s 
+13:27:57.644 [main] DEBUG lab.xml.CompositionsBaseXMLUtils - set duration : 5min 2s 
+13:27:57.644 [main] DEBUG lab.xml.CompositionsBaseXMLUtils - set duration : 3min 43s 

@@ -1,0 +1,54 @@
+h1 {
+    color: #Ff8800;
+    font-size: 20px
+}
+
+TABLE {
+    border-width: 18px;
+    border-style: inset;
+    border-color: #FFAA00
+}
+
+th {
+    color: #800800;
+    font-size: 14pt;
+    border-width: 3px;
+    border-style: SOL- ID;
+    border-color: #AAAA00
+}
+
+td {
+    color: #ff0800;
+    font-family: CALIBRI;
+    font-size: 10pt;
+    border-width: 2px;
+    border-style: DASHED;
+    border-color: #AA5500
+}
+
+th {
+    color: #800800;
+    font-family: CALIBRI;
+    font-size: 14pt
+}
+
+td {
+    color: #ff0800;
+    font-family: CALIBRI;
+    font-size: 10pt
+}
+
+{
+    color: ff0800
+;
+    font-family: CALIBRI
+;
+    font-size: 10pt
+}
+TABLE {
+    color: FFC0C0;
+    font-family: CALIBRI;
+    font-size: 104pt;
+    border: 2;
+    BORDERCOLOR = ffff00
+}
