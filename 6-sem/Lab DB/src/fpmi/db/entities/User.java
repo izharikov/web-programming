@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
+ * User entity
+ *
  * @author Ihar Zharykau
  */
 @Entity
@@ -13,9 +15,9 @@ import java.io.Serializable;
                 query = "SELECT count (u) from User u " +
                         "where u.name = :name and u.password = :password and u.role = :role"),
         @NamedQuery(name = "userByRole", query = "select u from User u where u.role = :role"),
-        @NamedQuery(name="userIdByName", query = "select u.id from User u where u.name = :name")
+        @NamedQuery(name = "userIdByName", query = "select u.id from User u where u.name = :name")
 })
-public class User implements Serializable{
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

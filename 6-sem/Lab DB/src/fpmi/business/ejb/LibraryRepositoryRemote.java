@@ -5,8 +5,10 @@ import fpmi.business.repository.LibraryRepository;
 import javax.ejb.Remote;
 
 /**
+ * Remote EJB
+ *
  * @author Ihar Zharykau
  */
 @Remote
-public interface LibraryRepositoryRemote extends LibraryRepository{
+public interface LibraryRepositoryRemote extends LibraryRepository {
 }

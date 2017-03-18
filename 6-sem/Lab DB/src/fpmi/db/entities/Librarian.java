@@ -1,6 +1,8 @@
 package fpmi.db.entities;
 
 /**
+ * Librarian entity. Deprecated: user {@link User} with role {@link Role#ADMIN} instead of this.
+ *
  * @author Ihar Zharykau
  */
 

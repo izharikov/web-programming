@@ -1,6 +1,8 @@
 package fpmi.db.exception;
 
 /**
+ * Exception in Dao-classes
+ *
  * @author Ihar Zharykau
  */
 public class DaoException extends Exception {

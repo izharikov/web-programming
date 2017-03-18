@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
+ * Book entity
+ *
  * @author Ihar Zharykau
  */
 @Entity
@@ -77,7 +79,7 @@ public class Book implements Serializable {
                 ", name='" + name + '\'' +
                 ", countOfBooks=" + countOfBooks +
                 ", catalog=" + (getCatalog() != null ? getCatalog().getName() : "null") +
-                ", author=" + (getAuthor() != null ? getCatalog().getName() : "null")  +
+                ", author=" + (getAuthor() != null ? getCatalog().getName() : "null") +
                 '}';
     }
 

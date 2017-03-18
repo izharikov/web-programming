@@ -5,17 +5,19 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * Author entity
+ *
  * @author Ihar Zharykau
  */
 @Entity
-@Table(name="author_tbl")
+@Table(name = "author_tbl")
 public class Author implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)

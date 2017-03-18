@@ -1,6 +1,8 @@
 package fpmi.db.exception;
 
 /**
+ * Exception, used when problems with sql connection occurred
+ *
  * @author Ihar Zharykau
  */
 public class JdbcException extends Exception{

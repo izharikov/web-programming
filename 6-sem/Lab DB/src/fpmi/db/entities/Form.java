@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * Form entity
+ *
  * @author Ihar Zharykau
  */
 

@@ -12,25 +12,90 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
+ * Base DAO (dao access object) class to perform base operations
+ *
  * @author Ihar Zharykau
  */
 abstract class DaoBase<T> implements JdbcCrudRepository<T> {
 
+    /**
+     * Statement for select Object by id
+     *
+     * @param connection connection object
+     * @param id         id of object
+     * @return prepared statement object
+     * @throws SQLException if SQL syntax error occurred
+     */
     protected abstract PreparedStatement selectSqlStatement(JdbcConnection connection, int id) throws SQLException;
 
+    /**
+     * Statement to check object exists in database (it's not select by id). <br>
+     * For example, if you need to check user exist by user name and password and there is now id, use this method
+     *
+     * @param connection connection object
+     * @param object     checked object
+     * @return prepared statement object
+     * @throws SQLException if SQL syntax error occurred
+     */
     protected abstract PreparedStatement existSqlStatement(JdbcConnection connection, T object) throws SQLException;
 
+    /**
+     * Statement to query all objects of specified type
+     *
+     * @param connection connection object
+     * @return prepared statement object
+     * @throws SQLException if SQL syntax error occurred
+     */
     protected abstract PreparedStatement queryAllStatement(JdbcConnection connection) throws SQLException;
 
+    /**
+     * Statement to insert object in database
+     *
+     * @param connection connection object
+     * @param entity     entity to insert
+     * @return prepared statement object
+     * @throws SQLException if SQL syntax error occurred
+     */
     protected abstract PreparedStatement insertSqlStatement(JdbcConnection connection, T entity) throws SQLException;
 
+    /**
+     * Statement to update object in database
+     *
+     * @param connection connection object
+     * @param entity     entity to update
+     * @return prepared statement object
+     * @throws SQLException if SQL syntax error occurred
+     */
     protected abstract PreparedStatement updateSqlStatement(JdbcConnection connection, T entity) throws SQLException;
 
+    /**
+     * Statement to delete object by id
+     *
+     * @param connection connection object
+     * @param id         object id
+     * @return prepared statement object
+     * @throws SQLException if SQL syntax error occurred
+     */
     protected abstract PreparedStatement deleteSqlStatement(JdbcConnection connection, int id) throws SQLException;
 
+    /**
+     * Statement to delete object from database
+     *
+     * @param connection connection object
+     * @param entity     entity to delete
+     * @return prepared statement object
+     * @throws SQLException if SQL syntax error occurred
+     */
     protected abstract PreparedStatement deleteSqlStatement(JdbcConnection connection, T entity) throws SQLException;
 
+    /**
+     * connection manager
+     */
     protected JdbcConnectionManager connectionManager;
+
+    /**
+     * entity adapter
+     */
     private EntityAdapter<T> entityAdapter;
 
     protected DaoBase(EntityAdapter<T> entityAdapter) {
@@ -131,7 +196,7 @@ abstract class DaoBase<T> implements JdbcCrudRepository<T> {
         try {
             preparedStatement = existSqlStatement(connection, object);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if ( resultSet.next()){
+            if (resultSet.next()) {
                 exist = true;
             }
         } catch (SQLException e) {

@@ -1,12 +1,11 @@
 package fpmi.db.connection;
 
-import fpmi.db.exception.DaoException;
-import fpmi.db.exception.JdbcException;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
+ * Jdbc Connection - wrapped {@link Connection} for easy managing it
+ *
  * @author Ihar Zharykau
  */
 public class JdbcConnection {
@@ -19,6 +18,9 @@ public class JdbcConnection {
         this.connection = connection;
     }
 
+    /**
+     * close the connection
+     */
     public void close() {
         if (connection != null) {
             try {

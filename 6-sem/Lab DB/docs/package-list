@@ -1,0 +1,14 @@
+fpmi.business.ejb
+fpmi.business.exception
+fpmi.business.repository
+fpmi.business.repository.jpa
+fpmi.db.adapter
+fpmi.db.connection
+fpmi.db.dao
+fpmi.db.dao.crud
+fpmi.db.dao.jpa
+fpmi.db.entities
+fpmi.db.exception
+fpmi.main
+fpmi.utils
+fpmi.utils.bean

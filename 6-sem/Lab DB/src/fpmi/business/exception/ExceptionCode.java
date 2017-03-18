@@ -1,6 +1,8 @@
 package fpmi.business.exception;
 
 /**
+ * Exception code to clarify system errors
+ *
  * @author Ihar Zharykau
  */
 public enum ExceptionCode {

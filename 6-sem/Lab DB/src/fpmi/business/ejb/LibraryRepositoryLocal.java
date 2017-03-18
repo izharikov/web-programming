@@ -5,6 +5,8 @@ import fpmi.business.repository.LibraryRepository;
 import javax.ejb.Local;
 
 /**
+ * Local EJB
+ *
  * @author Ihar Zharykau
  */
 @Local

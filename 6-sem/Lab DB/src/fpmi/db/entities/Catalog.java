@@ -5,17 +5,19 @@ import java.io.Serializable;
 import java.util.Set;
 
 /**
+ * Catalog entity
+ *
  * @author Ihar Zharykau
  */
 @Entity
-@Table(name="catalog_tbl")
+@Table(name = "catalog_tbl")
 public class Catalog implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "catalog", fetch = FetchType.LAZY)

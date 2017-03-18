@@ -1,16 +1,25 @@
 package fpmi.utils.bean;
 
 import com.sun.istack.NotNull;
-import fpmi.db.entities.Book;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 
 /**
+ * Bean utils to call methods using reflection.<br>
+ * To use this, object should be instance of class, that is valid bean: class, with declared getters and setters
+ *
  * @author Ihar Zharykau
  */
 public class BeanUtils {
-    public static <T> T newInstance(Class<T> clazz){
+    /**
+     * Create new instance for class
+     *
+     * @param clazz Class of object
+     * @param <T>   Class of object
+     * @return created object, or null if errors occurred
+     */
+    public static <T> T newInstance(Class<T> clazz) {
         try {
             return clazz.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
@@ -19,39 +28,41 @@ public class BeanUtils {
         return null;
     }
 
+    /**
+     * Call getter
+     *
+     * @param object    object, in which call getter
+     * @param fieldName field name of getter
+     * @param <T>       class of returned field
+     * @return field value, if it's exists. null - otherwise
+     */
     @SuppressWarnings("unchecked")
-    public static <T> T callGet(@NotNull Object object, String fieldName){
+    public static <T> T callGet(@NotNull Object object, String fieldName) {
         try {
             PropertyDescriptor pd = new PropertyDescriptor(fieldName, object.getClass());
             Method getter = pd.getReadMethod();
             Object value = getter.invoke(object);
             return (T) value;
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-
-    public static void callSet(Object object, String fieldName, Object value){
+    /**
+     * Call setter
+     *
+     * @param object    object, in which call setter
+     * @param fieldName field name
+     * @param value     value to set
+     */
+    public static void callSet(Object object, String fieldName, Object value) {
         try {
             PropertyDescriptor pd = new PropertyDescriptor(fieldName, object.getClass());
             Method setter = pd.getWriteMethod();
             setter.invoke(object, value);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    public static void main(String... args){
-        Book book = newInstance(Book.class);
-        if ( book != null){
-            callSet(book, "name", "Test Name");
-            callSet(book, "id", "book12345");
-            System.out.println((String) callGet(book, "name"));
-            System.out.println((String) callGet(book, "id"));
-            System.out.println(book.getName());
-            System.out.println(book.getId());
         }
     }
 }

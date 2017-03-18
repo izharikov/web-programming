@@ -1,6 +1,8 @@
 package fpmi.business.exception;
 
 /**
+ * RepositoryException class. Used in {@link fpmi.business.repository.LibraryRepository}
+ *
  * @author Ihar Zharykau
  */
 public class RepositoryException extends Exception {
